@@ -3,6 +3,7 @@
 import requests
 import os
 from bs4 import BeautifulSoup
+import sendMail
 
 URL ="https://www.xataka.com"
 page = requests.get(URL)
@@ -22,7 +23,6 @@ if os.path.exists(newsFile):
 else: 
     print(f"File '{newsFile}' not found.")
 
-news_dict = {}
 titles = results.find_all("a", class_="head-new-item")
 
 for title in titles:
@@ -33,14 +33,11 @@ for title in titles:
         try:
             key = new_title.strip() #Without strip, starts writing with \n
             value = href_url
-            news_dict[key] = value
             file.write(key+'\n')
-            file.write(value+'\n')
+            file.write(value+'\n'+'\n')
             file.close()
         except Exception as err:
             file.write('An ERROR occurred: '+ str(err)+ '\n')
             file.close()
 
-print(news_dict)
-
-## So far, we've stored the title of the new and its href as key and value in a dict. Next step will be send this info by email.
+sendMail
