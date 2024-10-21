@@ -3,7 +3,6 @@
 import requests
 import os
 from bs4 import BeautifulSoup
-import sendMail
 
 URL ="https://www.xataka.com"
 page = requests.get(URL)
@@ -21,7 +20,7 @@ if os.path.exists(newsFile):
     os.remove(newsFile)
     print(f"File '{newsFile}' deleted successfully.")
 else: 
-    print(f"File '{newsFile}' not found.")
+    print(f"File '{newsFile}' not found, hence creating.")
 
 titles = results.find_all("a", class_="head-new-item")
 
@@ -40,4 +39,5 @@ for title in titles:
             file.write('An ERROR occurred: '+ str(err)+ '\n')
             file.close()
 
+import sendMail
 sendMail
