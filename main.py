@@ -23,21 +23,13 @@ else:
     print(f"File '{newsFile}' not found, hence creating.")
 
 titles = results.find_all("a", class_="head-new-item")
+dict = {}
 
 for title in titles:
     new_title = title.text
     href=title.get('href')
     href_url=URL+href
-    with open(newsFile, 'a+', encoding='utf-8') as file: #Sending title and href to webpageNews
-        try:
-            key = new_title.strip() #Without strip, starts writing with \n
-            value = href_url
-            file.write(key+'\n')
-            file.write(value+'\n'+'\n')
-            file.close()
-        except Exception as err:
-            file.write('An ERROR occurred: '+ str(err)+ '\n')
-            file.close()
+    dict[new_title.strip()] = href_url
 
 import sendMail
 sendMail
