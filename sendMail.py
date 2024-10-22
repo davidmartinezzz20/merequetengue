@@ -1,11 +1,11 @@
 import smtplib
 from email.mime.text import MIMEText
 from settings import importantKey
-text = open('webPageNews', 'r', encoding='utf-8')
+from mailBody import mailBody
 
 # Define the subject and body of the email.
 subject = "This is your periodical news wrap up."
-body = text.read()
+body = mailBody
 # Define the sender's email address.
 sender = "elmeseherodedios@gmail.com"
 # List of recipients to whom the email will be sent.
@@ -15,7 +15,7 @@ password = importantKey
 
 def send_email(subject, body, sender, recipients, password):
     # Create a MIMEText object with the body of the email.
-    msg = MIMEText(body)
+    msg = MIMEText(body, 'html')
     # Set the subject of the email.
     msg['Subject'] = subject
     # Set the sender's email.
@@ -34,5 +34,3 @@ def send_email(subject, body, sender, recipients, password):
 
 # Call the function to send the email.
 send_email(subject, body, sender, recipients, password)
-
-text.close()
