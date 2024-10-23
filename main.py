@@ -27,9 +27,8 @@ dict = {}
 
 for title in titles:
     new_title = title.text
-    href=title.get('href')
-    href_url=URL+href
-    dict[new_title.strip()] = href_url
+    href=URL+title.get('href')
+    dict[new_title.strip()] = href
 
 import sendMail
 sendMail
